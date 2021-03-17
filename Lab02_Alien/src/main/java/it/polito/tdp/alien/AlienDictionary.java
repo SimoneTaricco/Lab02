@@ -20,10 +20,20 @@ public class AlienDictionary {
 	}
 	
 	public String translateWord(String alienWord) {
+		
 		for (Word w:this.dictionary) {
 			if (w.equals((Object)alienWord)) 
 				return w.getTranslation();
 		}
+		
+		if (alienWord.contains("?")) {
+			int position = alienWord.indexOf('?');
+			String alienWordWC = alienWord.substring(0,position) + alienWord.substring(position+1,alienWord.length());
+			for (Word w:this.dictionary) {
+				if (alienWordWC.equals(w.getAlienWord().substring(0,position) + w.getAlienWord().substring(position+1,w.getAlienWord().length())))
+					return w.getTranslation();
+			}
+		}	
 		return null;
 	}
 

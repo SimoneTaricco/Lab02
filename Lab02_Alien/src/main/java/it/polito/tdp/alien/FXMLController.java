@@ -53,20 +53,36 @@ public class FXMLController {
     			txtResult.setText("Wrong input format!");
     			return;
     		}
+    		
     		model.addWord(traduzione[0], traduzione[1]);
     		txtResult.setText("Word added succesfully!");
     	}
     	
     	else if (str.trim().contains(" ") == false) {
     		
-    		String result = model.translateWord(str.toLowerCase());
+    		int questionMarksCounter = 0;
     		
+    		for (int i=0;i<str.length();i++) {
+    			if (str.charAt(i) == '?')
+    				questionMarksCounter++;
+    		}
+    		
+    		if (questionMarksCounter>1) {
+    			txtResult.setText("Wrong format - you cannot insert more than one '?'");
+    			return;
+    		}
+    		
+    		String result = model.translateWord(str.toLowerCase());
+    	
     		if (result == null) {
     			txtResult.setText("Word '" + str.trim() + "' not in the dictionary.");
     			return;
     		}
     		
-    		txtResult.setText(str.trim() + " = " + result);
+    		txtResult.setText("Traduzioni della parola cercata");
+    		if (questionMarksCounter == 1)
+    			txtResult.appendText(" (ricerca con wildcard)");
+    		txtResult.appendText(": \n" + result);
     		return;
     	}
     	  	

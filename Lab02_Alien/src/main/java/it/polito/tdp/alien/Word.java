@@ -37,7 +37,7 @@ public class Word {
 		String result = "";
 		
 		for (String s:this.translations)
-			result += s + "\n\t";
+			result += s + "\n";
 		
 		return result.trim();
 	}
