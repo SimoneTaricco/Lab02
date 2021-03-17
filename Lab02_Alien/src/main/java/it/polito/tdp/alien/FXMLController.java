@@ -5,9 +5,18 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+
+
+
 
 public class FXMLController {
+	
+	private AlienDictionary model;
+	
+	public void setModel(AlienDictionary model) {
+		this.model = model;
+	}
 
     @FXML
     private ResourceBundle resources;
@@ -20,16 +29,52 @@ public class FXMLController {
     
     @FXML
     private Button btnReset;
+    
+    @FXML
+    private TextField txtInput;
+
+    @FXML
+    private TextArea txtResult;
 
     @FXML
     void doTranslate(ActionEvent event) {
-    	// TODO - add the button and complete this    	
+    	
+    	String str = txtInput.getText();
+    	
+    	if (str.matches(".*\\d.*")){
+    		txtResult.setText("Wrong input format! Words cannot contain numbers.");
+			return;
+    	}
+    	
+    	if (str.contains(" ")){
+    		String traduzione[] = str.split(" ");
+ 		
+    		if (traduzione.length != 2) {
+    			txtResult.setText("Wrong input format!");
+    			return;
+    		}
+    		model.addWord(traduzione[0], traduzione[1]);
+    		txtResult.setText("Word added succesfully!");
+    	}
+    	
+    	else if (str.trim().contains(" ") == false) {
+    		String result = model.translateWord(str);
+    		
+    		if (result == null) {
+    			txtResult.setText("Word '" + str.trim() + "' not in the dictionary.");
+    			return;
+    		}
+    		
+    		txtResult.setText(str.trim() + " = " + result);
+    		return;
+    	}
+    	  	
     }
     
     
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO - add the button and complete this 
+    	txtInput.clear();
     }
     
     
