@@ -44,7 +44,7 @@ public class Word {
 		
 		String other = (String) obj;
 				
-		if (this.alienWord.equals(other))
+		if (this.alienWord.toLowerCase().equals(other))
 			return true;
 		
 		return false;

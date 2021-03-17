@@ -58,7 +58,8 @@ public class FXMLController {
     	}
     	
     	else if (str.trim().contains(" ") == false) {
-    		String result = model.translateWord(str);
+    		
+    		String result = model.translateWord(str.toLowerCase());
     		
     		if (result == null) {
     			txtResult.setText("Word '" + str.trim() + "' not in the dictionary.");
