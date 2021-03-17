@@ -1,13 +1,18 @@
 package it.polito.tdp.alien;
 
+import java.util.*;
+
 public class Word {
 	
 	private String alienWord;
 	private String translation;	
+	
+	private List<String> translations;
 		
 	public Word(String alienWord, String translation) {
 		this.alienWord = alienWord;
 		this.translation = translation;
+		this.translations = new ArrayList<String>();
 	}
 	
 	
@@ -20,11 +25,27 @@ public class Word {
 	}
 
 	public String getTranslation() {
-		return this.translation;
+		return this.translationsString();
 	}
 
-	public void setTranslation(String translation) {
+	/*public void setTranslation(String translation) {
 		this.translation = translation;
+	}*/
+	
+	public String translationsString() {
+		
+		String result = "";
+		
+		for (String s:this.translations)
+			result += s + "\n\t";
+		
+		return result.trim();
+	}
+	
+	public void addTranslation(String translation) {
+		
+		if (this.translations.contains(translation) == false)
+			this.translations.add(translation);
 	}
 
 	@Override

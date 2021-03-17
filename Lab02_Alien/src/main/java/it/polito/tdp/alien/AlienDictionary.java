@@ -9,13 +9,14 @@ public class AlienDictionary {
 	public void addWord(String alienWord, String translation) {
 		for (Word w:this.dictionary) {
 			if (w.equals((Object)alienWord)) {
-				w.setTranslation(translation);
+				w.addTranslation(translation);
 				break;
 			}
 		}
 
 		Word w = new Word(alienWord,translation);
 		this.dictionary.add(w);
+		w.addTranslation(translation);
 	}
 	
 	public String translateWord(String alienWord) {
